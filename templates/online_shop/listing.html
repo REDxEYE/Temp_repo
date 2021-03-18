@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-2">
+            <h2>Категории</h2>
+            <ul class="list-group">
+                {% for tag in all_tags %}
+                    <li class="list-group-item"><a href="?filter={{ tag.key }}">{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-9">
+            {% for item_row in item_rows %}
+                <div class="row">
+                    <div class="card-deck">
+                        {% for item in item_row %}
+                            <div class="card">
+                                <img class="card-img-top" style="object-fit: cover; width: 318px; height: 100px"
+                                     src="{{ item.image.url }}" alt="Preview">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ item.name }}</h4>
+                                    <p class="card-text">
+                                        {{ item.shot_desc }}
+                                    </p>
+                                    <div class="row">
+                                        <div class="col d-inline"><h5 class="d-inline">Цена: </h5><h5
+                                                class="d-inline">{{ item.price }}$</h5></div>
+                                        <div class="col">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a href="{% url 'add_item' item_id=item.id.int %}"
+                                                   class="btn btn-primary">В корзину</a>
+                                                <a href="{% url 'item_view' item_id=item.id.int %}"
+                                                   class="btn btn-primary">Подробнее</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-1"></div>
+    </div>
+{% endblock %}

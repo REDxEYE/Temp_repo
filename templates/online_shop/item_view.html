@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col"><h3>{{ item.name }}</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <img class="card-img-top" src="{{ item.image.url }}" alt="Preview">
+            </div>
+            <div class="col-8">
+                <h4>Описание: </h4>
+                <p class="flex-lg-wrap">{{ item.desc }}</p></div>
+
+        </div>
+    </div>
+{% endblock %}

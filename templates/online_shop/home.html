@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-5">Привет {{ user.username|default:'Гость' }}, добро пожаловать в наш магазин!</h1>
+        <p class="lead">Здесь вы можете купить комплектующие для вашего ПК.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'listing' %}" role="button">Перейти к товарам</a>
+    </div>
+{% endblock %}

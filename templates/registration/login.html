@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+    <div class="col-4 align-self-center">
+
+        <div class="jumbotron justify-content-center">
+            <h2 class="justify-content-center">Логин</h2>
+            <form method="post" id="login_form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {#                <input type="submit" value="Login">#}
+            </form>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-primary" type="submit" value="Login" form="login_form">Логин</button>
+                <a class="btn btn-primary" href="{% url 'home' %}">Домой</a>
+                <a class="btn btn-primary" href="{% url 'signup' %}">Региатрация</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
