@@ -44,7 +44,7 @@ def listing(request):
     for item in items:
         if len(cur_row) == 3:
             rows.append(cur_row)
-            cur_row = []
+            cur_row = [item]
         else:
             cur_row.append(item)
     if cur_row not in rows:
