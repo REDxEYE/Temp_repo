@@ -47,16 +47,19 @@
                     aria-haspopup="true" aria-expanded="false">
                 Корзина
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu"
+                 style="position: absolute; transform: translateX(-100%); top: 0px; left: 0px; will-change: transform;">
                 <h6 class="dropdown-header">Список покупок</h6>
                 {% if request.user.cart %}
                     {% for sc_item in request.user.cart.first.items.all %}
                         <div class="col-3 dropdown-item">
-                            <div class="d-inline">{{ sc_item.item.name }} * {{ sc_item.quantity }}</div>
+                            <div class="d-inline">{{ sc_item.item.name|slice:":64" }} * {{ sc_item.quantity }}</div>
                             <a class="btn btn-primary" href="{% url "remove_item" sc_item.id %}"><span
                                     aria-hidden="true">&times;</span></a>
                         </div>
                     {% endfor %}
+                     <a class="btn btn-primary" href="{% url "checkout" %}"><span
+                                    aria-hidden="true">Оформить заказ</span></a>
                 {% endif %}
             </div>
         </div>

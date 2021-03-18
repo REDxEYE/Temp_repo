@@ -85,3 +85,8 @@ def remove_item(request, item_id):
 def item_view(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     return render(request, 'online_shop/item_view.html', context={'item': item})
+
+
+@login_required(login_url='/accounts/login')
+def checkout(request):
+    return render(request, 'online_shop/plug.html')

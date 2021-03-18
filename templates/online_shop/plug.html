@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <img class="card-img-top" src="https://vgif.ru/gifs/141/vgif-ru-17066.gif" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">В разработке</h4>
+                <p class="card-text">
+                    Наш единственный программист работает над этой страницей в поте лица
+                </p>
+                <a href="{% url "home" %}" class="btn btn-primary">На главную</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
