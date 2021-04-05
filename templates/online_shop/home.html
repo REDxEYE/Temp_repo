@@ -20,21 +20,24 @@
                     {% endif %}
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    <a href="{% url 'item_view' item_id=active.id.int %}">
-                        <div class="carousel-item active">
+                    <div class="carousel-item active">
+                        <a href="{% url 'item_view' item_id=active.id.int %}">
+
                             <img class="d-block w-100" src="{{ active.image.url }}" style="filter: brightness(50%)"
                                  alt="{{ active.shot_desc }}">
                             <div class="carousel-caption d-none d-md-block">
                                 <h3>{{ active.name }}</h3>
                                 <p>{{ active.shot_desc }}</p>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+
                 </div>
                 {% if other %}
                     {% for item in other %}
-                        <a href="{% url 'item_view' item_id=item.id.int %}">
-                            <div class="carousel-item">
+
+                        <div class="carousel-item">
+                            <a href="{% url 'item_view' item_id=item.id.int %}">
                                 <img class="d-block w-100" src="{{ item.image.url }}"
                                      style="filter: brightness(50%)"
                                      alt="{{ item.shot_desc }}">
@@ -42,8 +45,9 @@
                                     <h3>{{ item.name }}</h3>
                                     <p>{{ item.shot_desc }}</p>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+
                     {% endfor %}
                 {% endif %}
             </div>
