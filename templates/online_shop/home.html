@@ -20,7 +20,7 @@
                     {% endif %}
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    <a href="{% url 'item_view' item_id=active %}">
+                    <a href="{% url 'item_view' item_id=active.id.int %}">
                         <div class="carousel-item active">
                             <img class="d-block w-100" src="{{ active.image.url }}" style="filter: brightness(50%)"
                                  alt="{{ active.shot_desc }}">
