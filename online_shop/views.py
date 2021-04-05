@@ -28,7 +28,9 @@ def signup(request):
 
 
 def home(request):
-    return render(request, 'online_shop/home.html')
+    items = Item.objects.all().order_by('id')[:5]
+
+    return render(request, 'online_shop/home.html', context={'active': items[0], 'other': items[1:]})
 
 
 def listing(request):
