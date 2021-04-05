@@ -5,8 +5,11 @@
         <h1 class="display-5">Привет {{ user.username|default:'Гость' }}, добро пожаловать в наш магазин!</h1>
         <p class="lead">Здесь вы можете купить комплектующие для вашего ПК.</p>
         <a class="btn btn-primary btn-lg" href="{% url 'listing' %}" role="button">Перейти к товарам</a>
-
-        <div class="bd-example" style="width: 35%">
+        <br><br><br>
+        <div class="bd-example border border-dark rounded"
+             style="width: 35%;
+                     border:3px solid !important;
+                     border-radius: 0.5rem!important">
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     {% if active %}
@@ -20,21 +23,25 @@
                     {% endif %}
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active" style="height: 150px">
+                    <div class="carousel-item active" style="height: 300px">
                         <img class="d-block w-100" src="{{ active.image.url }}" style="filter: brightness(50%)"
                              alt="{{ active.shot_desc }}">
                         <div class="carousel-caption d-none d-md-block">
-                            <h3>{{ active.name }}</h3>
+                            <a href="{% url 'item_view' item_id=active.id.int %}">
+                                <h3>{{ active.name }}</h3>
+                            </a>
                             <p>{{ active.shot_desc }}</p>
                         </div>
                     </div>
                     {% if other %}
                         {% for item in other %}
-                            <div class="carousel-item" style="height: 150px">
+                            <div class="carousel-item" style="height: 300px">
                                 <img class="d-block w-100" src="{{ item.image.url }}" style="filter: brightness(50%)"
                                      alt="{{ item.shot_desc }}">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h3>{{ item.name }}</h3>
+                                    <a href="{% url 'item_view' item_id=item.id.int %}">
+                                        <h3>{{ active.name }}</h3>
+                                    </a>
                                     <p>{{ item.shot_desc }}</p>
                                 </div>
                             </div>

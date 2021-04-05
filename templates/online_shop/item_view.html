@@ -6,13 +6,21 @@
             <div class="col"><h3>{{ item.name }}</h3></div>
         </div>
         <div class="row">
-            <div class="col-4">
+            <div class="col-4 border border-dark rounded" style="width: 35%;
+                     border:3px solid !important;
+                     border-radius: 0.5rem!important">
                 <img class="card-img-top" src="{{ item.image.url }}" alt="Preview">
             </div>
-            <div class="col-8">
+            <div class="col-8 border border-dark rounded" style="width: 35%;
+                     border:3px solid !important;
+                     border-radius: 0.5rem!important">
                 <h4>Описание: </h4>
-                <p class="flex-lg-wrap">{{ item.desc }}</p></div>
+                <p class="flex-lg-wrap">{{ item.desc }}</p>
+                <a href="{% url 'add_item' item_id=item.id.int %}"
+                   class="btn btn-primary">В корзину</a>
+            </div>
 
         </div>
     </div>
+
 {% endblock %}
