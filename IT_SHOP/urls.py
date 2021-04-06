@@ -28,4 +28,5 @@ urlpatterns = [
                   path('signup/', views.signup, name='signup'),
                   path(r'', RedirectView.as_view(url='shop/home')),
                   path(r"shop/", include("online_shop.urls")),
+                  path(r"api/", include("online_shop.api_urls")),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
