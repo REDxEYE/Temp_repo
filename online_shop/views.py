@@ -1,6 +1,8 @@
+from collections import defaultdict
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from online_shop.models import Item, Review, ShoppingCart, ShoppingCartItem, Tag
+from online_shop.models import Item, Review, ShoppingCart, ShoppingCartItem, Tag, Attribute, AttributeValue
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
@@ -35,8 +37,13 @@ def home(request):
 
 def listing(request):
     item_filter = request.GET.get('filter', None)
+    attribute_name = request.GET.get('attribute_name', None)
+    attribute_value = request.GET.get('attribute_value', None)
     if item_filter is not None:
-        items = Item.objects.filter(tags__key__contains=item_filter).all()
+        items = Item.objects.filter(tag__key__iexact=item_filter).all()
+    elif attribute_value and attribute_value:
+        items = Item.objects.filter(attributes__attribute__key__iexact=attribute_name,
+                                    attributes__value__icontains=attribute_value).all()
     else:
         items = Item.objects.all()
     tags = Tag.objects.all()
@@ -51,9 +58,15 @@ def listing(request):
             cur_row.append(item)
     if cur_row not in rows:
         rows.append(cur_row)
+    available_attributes = {}
+
+    for item in items:
+        for attr_value in AttributeValue.objects.filter(item=item):
+            attr_value: AttributeValue
+            available_attributes.setdefault(attr_value.attribute, set()).add(attr_value.value)
 
     return render(request, 'online_shop/listing.html',
-                  context={'item_rows': rows, 'all_tags': tags})
+                  context={'item_rows': rows, 'all_tags': tags, 'available_attributes': available_attributes})
 
 
 @login_required(login_url='/accounts/login')

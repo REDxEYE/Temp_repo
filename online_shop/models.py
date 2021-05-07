@@ -18,7 +18,8 @@ class ShoppingCartItem(models.Model):
 
 class Item(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    tags = models.ManyToManyField('Tag')
+    tag = models.ForeignKey('Tag', models.deletion.SET_NULL, null=True)
+    attributes = models.ManyToManyField('AttributeValue')
     name = models.CharField(max_length=256)
     desc = models.TextField()
     shot_desc = models.CharField(max_length=150, default="...")
@@ -32,9 +33,27 @@ class Item(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=32, default='No tag')
     key = models.CharField(max_length=32, default='no-tag')
+    attributes = models.ManyToManyField('Attribute')
 
     def __str__(self):
         return f'{self.name}-{self.key}'
+
+
+class Attribute(models.Model):
+    name = models.CharField(max_length=32, default='No attribute')
+    key = models.CharField(max_length=32, default='no-attribute')
+    tags = models.ManyToManyField('Tag')
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class AttributeValue(models.Model):
+    attribute = models.ForeignKey('Attribute', models.deletion.CASCADE)
+    value = models.CharField(max_length=260, default='Missing value')
+
+    def __str__(self):
+        return f'{self.attribute.name}: "{self.value}"'
 
 
 class Review(models.Model):

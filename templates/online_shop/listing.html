@@ -9,13 +9,28 @@
                     <li class="list-group-item"><a href="?filter={{ tag.key }}">{{ tag.name }}</a></li>
                 {% endfor %}
             </ul>
+            <h2>Парамерты</h2>
+            <ul class="list-group">
+                {% for attribute, attribute_values in available_attributes.items %}
+                    <li class="list-group-item">{{ attribute.name }}
+                        <ul>
+                            {% for attribute_value in attribute_values %}
+                                <li>
+                                    <a href="?attribute_name={{ attribute.key }}&attribute_value={{ attribute_value }}">{{ attribute_value }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
         <div class="col-9">
             {% for item_row in item_rows %}
-                <div class="row">
+                <div class="row" style="margin-top: 2em">
                     <div class="card-deck">
                         {% for item in item_row %}
-                            <div class="card">
+                            <div class="card" style="max-width: 37%">
                                 <img class="card-img-top" style="object-fit: cover; width: 318px; height: 100px"
                                      src="{{ item.image.url }}" alt="Preview">
                                 <div class="card-body">
