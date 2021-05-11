@@ -106,6 +106,15 @@ def item_view(request, item_id):
 @login_required(login_url='/accounts/login')
 def checkout(request):
     user = request.user
-    sc = ShoppingCartItem.objects.filter(cart__user=user)
-    form = CheckoutForm()
-    return render(request, 'online_shop/checkout.html', context={'items': sc, 'form': form})
+    sc_items = ShoppingCartItem.objects.filter(cart__user=user)
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            form = CheckoutForm()
+            for item in sc_items:
+                item.delete()
+            return render(request, 'online_shop/checkout.html', context={'items': [], 'form': form})
+    else:
+
+        form = CheckoutForm()
+        return render(request, 'online_shop/checkout.html', context={'items': sc_items, 'form': form})

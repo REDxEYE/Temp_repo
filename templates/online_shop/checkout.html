@@ -16,15 +16,18 @@
                                     aria-hidden="true">&times;</span></a>
                             </li>
                         {% endfor %}
+                    {% empty %}
+                        <li style="margin-top: 1em">{{ item.item.name }}Пусто
+                        </li>
                     {% endfor %}
                 </ul>
                 </p>
-                <form action="#" method="post">
+                <form action="#" method="post" id='checkout'>
                     {% csrf_token %}
                     {% bootstrap_form form %}
                 </form>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button class="btn btn-primary" type="submit" value="checkout">Оформить</button>
+                    <button class="btn btn-primary" type="submit" value="checkout" form="checkout">Оформить</button>
                     <a class="btn btn-primary" href="{% url 'home' %}">Домой</a>
                 </div>
             </div>
