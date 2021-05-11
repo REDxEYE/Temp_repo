@@ -11,16 +11,23 @@
                 <ul>
                     {% for item in items %}
                         {% for _ in item.quantity|range %}
-                            <li style="margin-top: 1em">{{ item.item.name }} <a class="btn btn-primary"
-                                                                                href="{% url "remove_item" item.id %}"><span
-                                    aria-hidden="true">&times;</span></a>
-                            </li>
+                            <div class="row" style="margin-top: 0.5em">
+                                <div class="col-8" style="max-width: 64em">{{ item.item.name }}</div>
+                                <div class="col-2" style="max-width: 6em"><b>{{ item.item.price }}$</b></div>
+                                <div class="col-2">
+                                    <a class="btn btn-primary" href="{% url "remove_item" item.id %}">
+                                        <span aria-hidden="true">&times;</span>
+                                    </a>
+                                </div>
+
+                            </div>
                         {% endfor %}
                     {% empty %}
-                        <li style="margin-top: 1em">{{ item.item.name }}Пусто
+                        <li style="margin-top: 1em">Пусто
                         </li>
                     {% endfor %}
                 </ul>
+                <h4>Итого: <b>{{ total }}$</b></h4>
                 </p>
                 <form action="#" method="post" id='checkout'>
                     {% csrf_token %}

@@ -113,8 +113,9 @@ def checkout(request):
             form = CheckoutForm()
             for item in sc_items:
                 item.delete()
-            return render(request, 'online_shop/checkout.html', context={'items': [], 'form': form})
+            return render(request, 'online_shop/checkout.html', context={'items': [], 'form': form, 'total': 0})
     else:
-
         form = CheckoutForm()
-        return render(request, 'online_shop/checkout.html', context={'items': sc_items, 'form': form})
+        total = sum([item.item.price * item.quantity for item in sc_items])
+
+        return render(request, 'online_shop/checkout.html', context={'items': sc_items, 'form': form, 'total': total})
