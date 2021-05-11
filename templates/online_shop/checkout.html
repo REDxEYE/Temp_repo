@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% load range %}
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Оформление заказа</h4>
+                <p class="card-text">
+                <ul>
+                    {% for item in items %}
+                        {% for _ in item.quantity|range %}
+                            <li style="margin-top: 1em">{{ item.item.name }} <a class="btn btn-primary"
+                                                                                href="{% url "remove_item" item.id %}"><span
+                                    aria-hidden="true">&times;</span></a>
+                            </li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+                </p>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                </form>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button class="btn btn-primary" type="submit" value="checkout">Оформить</button>
+                    <a class="btn btn-primary" href="{% url 'home' %}">Домой</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

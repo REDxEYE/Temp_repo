@@ -24,7 +24,7 @@ from online_shop import views
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path(r"accounts/", include("django.contrib.auth.urls")),
-                  path('logout/', views.logout_shortcut,name='logout_shortcut'),
+                  path('logout/', views.logout_shortcut, name='logout_shortcut'),
                   path('signup/', views.signup, name='signup'),
                   path(r'', RedirectView.as_view(url='shop/home')),
                   path(r"shop/", include("online_shop.urls")),

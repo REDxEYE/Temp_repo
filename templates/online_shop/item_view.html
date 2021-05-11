@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
+    <div class="container border border-dark rounded" style="min-width: 90%;
+        border:3px solid !important;
+        border-radius: 0.5rem!important
+">
         <div class="row">
             <div class="col"><h3>{{ item.name }}</h3></div>
         </div>
-        <div class="row">
-            <div class="col-4 border border-dark rounded" style="width: 35%;
-                     border:3px solid !important;
-                     border-radius: 0.5rem!important">
+        <div class="row " style="max-width: 80%;">
+            <div class="col-1" style="width: 35%;
+                min-width: 30em;
+                min-height: 30em;
+            ">
                 <img class="card-img-top" src="{{ item.image.url }}" alt="Preview">
             </div>
-            <div class="col-8 border border-dark rounded" style="width: 35%;
-                     border:3px solid !important;
-                     border-radius: 0.5rem!important">
-                <h4>Описание: </h4>
+            <div class="col" style="width: 50%;min-width: 50%;">
                 <p class="flex-lg-wrap">{{ item.desc }}</p>
-                <a href="{% url 'add_item' item_id=item.id.int %}"
-                   class="btn btn-primary">В корзину</a>
+                <div class="row">
+                        <h3 class="text-center" style="margin-right: 2em">Цена: {{ item.price }}$</h3>
+                        <a href="{% url 'add_item' item_id=item.id.int %}" class="btn btn-primary">В корзину</a>
+                </div>
             </div>
 
         </div>

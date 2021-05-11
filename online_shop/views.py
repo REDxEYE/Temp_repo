@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from online_shop.models import Item, Review, ShoppingCart, ShoppingCartItem, Tag, Attribute, AttributeValue
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from online_shop.forms import CheckoutForm
 
 
 # Create your views here.
@@ -82,7 +83,7 @@ def add_item(request, item_id):
 
     cart_item.save()
 
-    return redirect('listing')
+    return redirect(request.headers['referer'])
 
 
 @login_required(login_url='/accounts/login')
@@ -94,7 +95,7 @@ def remove_item(request, item_id):
     else:
         item.delete()
 
-    return redirect('listing')
+    return redirect(request.headers['referer'])
 
 
 def item_view(request, item_id):
@@ -104,4 +105,7 @@ def item_view(request, item_id):
 
 @login_required(login_url='/accounts/login')
 def checkout(request):
-    return render(request, 'online_shop/plug.html')
+    user = request.user
+    sc = ShoppingCartItem.objects.filter(cart__user=user)
+    form = CheckoutForm()
+    return render(request, 'online_shop/checkout.html', context={'items': sc, 'form': form})
