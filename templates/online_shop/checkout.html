@@ -13,7 +13,7 @@
                         {% for _ in item.quantity|range %}
                             <tr>
                                 <th class="col-8" style="max-width: 64em">{{ item.item.name }}</th>
-                                <th class="col-2" style="max-width: 6em"><b>{{ item.item.price }}$</b></th>
+                                <th class="col-2" style="max-width: 6em"><b>{{ item.item.price }} руб.</b></th>
                                 <th class="col-2">
                                     <a class="btn btn-primary" href="{% url "remove_item" item.id %}">
                                         <span aria-hidden="true">&times;</span>
@@ -27,7 +27,7 @@
                         </li>
                     {% endfor %}
                 </table>
-                <h4>Итого: <b>{{ total }}$</b></h4>
+                <h4>Итого: <b>{{ total }} руб.</b></h4>
                 </p>
                 <form action="#" method="post" id='checkout'>
                     {% csrf_token %}

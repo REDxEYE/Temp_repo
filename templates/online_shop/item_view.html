@@ -18,7 +18,7 @@
             <div class="col" style="width: 50%;min-width: 50%;">
                 <p class="flex-lg-wrap">{{ item.desc }}</p>
                 <div class="row">
-                        <h3 class="text-center" style="margin-right: 2em">Цена: {{ item.price }}$</h3>
+                        <h3 class="text-center" style="margin-right: 2em">Цена: {{ item.price }} руб.</h3>
                         <a href="{% url 'add_item' item_id=item.id.int %}" class="btn btn-primary">В корзину</a>
                 </div>
             </div>
